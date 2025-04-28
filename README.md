@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UI-AI Library
 
-## Getting Started
+A simple and easy-to-use library built with Next.js, custom components, and the Ollama JavaScript library. This library includes the following components:
 
-First, run the development server:
+- **ELIF5 Component**
+- **Summarize Component**
+- **Semantic Search Box Component**
+
+The library integrates seamlessly with Ollama, and no additional setup is required for Ollama since it is included in the npm `ollama` package. Ollama is also configured to run locally for a smooth development experience.
+
+## Features
+
+- **ELIF5 Component**: [Brief description of what this component does]
+- **Summarize Component**: [Brief description of what this component does]
+- **Semantic Search Box Component**: [Brief description of what this component does]
+
+## Installation
+
+To use this library, simply install it via npm:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install ui-ai
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Once the package is installed, you can start using the components. Here's an example of how to use each one:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ELIF5 Component
 
-## Learn More
+```javascript
+import { ELIF5 } from 'ui_ai';
 
-To learn more about Next.js, take a look at the following resources:
+const App = () => {
+  return (
+    <div className="flex flex-wrap gap-1 items-start">
+        <p>Neural networks are a part of</p>
+        <ExplainLikeIm5 term="machine learning" />
+        <p>, which is a subset of AI.</p>
+      </div>
+  );
+};
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Summarize Component
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```javascript
+import { Summarize } from 'ui_ai';
 
-## Deploy on Vercel
+const App = () => {
+  return (
+    <div>
+      <AutoSummaryCard/>
+    </div>
+  );
+};
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Semantic Search Box Component
+
+```javascript
+import { SemanticSearchBox } from 'ui_ai';
+
+const App = () => {
+  return (
+    <div>
+      <SemanticSearchBox />
+    </div>
+  );
+};
+```
+## Requirements
+
+- Node.js (v12 or later)
+- npm (v6 or later)
+- Ollama (already bundled in the package)
+
+## How It Works
+
+The library integrates directly with Ollama, providing the easiest way to get up and running with AI-driven features. Ollama is already running locally, so you don’t need to set up or configure it separately.
+
+## Contributing
+
+Feel free to fork this repository, submit pull requests, or open issues if you find bugs or have suggestions for new features!
