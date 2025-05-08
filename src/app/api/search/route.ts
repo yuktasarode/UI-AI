@@ -1,8 +1,9 @@
 'use server'
 import { NextRequest } from 'next/server';
 import ollama from 'ollama';
-import { vectorStore } from '@/utils/vector-store';
-import { cosineSimilarity } from '@/utils/vector-utils';
+// import { vectorStore } from '@/utils/vector-store';
+// import { cosineSimilarity } from '@/utils/vector-utils';
+import { queryChroma } from '@/utils/chroma';
 
 export async function POST(req: NextRequest) {
   const { query, useRAG = false } = await req.json();
@@ -10,28 +11,41 @@ export async function POST(req: NextRequest) {
   let context = '';
   console.log(useRAG)
 
-  if (useRAG && vectorStore.length > 0) {
-    const res = await fetch('http://localhost:11434/api/embeddings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'nomic-embed-text',
-        prompt: query,
-      }),
-    });
-    const { embedding: queryEmbedding } = await res.json();
+  // if (useRAG && vectorStore.length > 0) {
+  //   const res = await fetch('http://localhost:11434/api/embeddings', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({
+  //       model: 'nomic-embed-text',
+  //       prompt: query,
+  //     }),
+  //   });
+  //   const { embedding: queryEmbedding } = await res.json();
 
-    const topChunks = vectorStore
-      .map(item => ({
-        ...item,
-        score: cosineSimilarity(queryEmbedding, item.embedding),
-      }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 3);
+  //   const topChunks = vectorStore
+  //     .map(item => ({
+  //       ...item,
+  //       score: cosineSimilarity(queryEmbedding, item.embedding),
+  //     }))
+  //     .sort((a, b) => b.score - a.score)
+  //     .slice(0, 3);
 
-      console.log('🧠 TOP CHUNKS:', topChunks.map(c => c.chunk).join('\n---\n'));
+  //     console.log('🧠 TOP CHUNKS:', topChunks.map(c => c.chunk).join('\n---\n'));
 
-    context = topChunks.map(chunk => chunk.chunk).join('\n\n');
+  //   context = topChunks.map(chunk => chunk.chunk).join('\n\n');
+  // }
+
+  if (useRAG) {
+    try {
+      const topChunks = await queryChroma(query, 3);
+      console.log('🧠 TOP CHUNKS (Chroma):', topChunks.join('\n---\n'));
+      context = topChunks.join('\n\n');
+    } catch (err: any) {
+      return new Response('Error: ' + err.message, {
+        status: 500,
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    }
   }
 
   
