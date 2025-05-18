@@ -2,7 +2,7 @@
 
 A simple and easy-to-use library built with Next.js, custom components, and the Ollama JavaScript library. This library includes the following components:
 
-- **ELIF5 Component**
+- **ELI5 Component**
 - **Summarize Component**
 - **Semantic Search Box Component**
 
@@ -10,7 +10,7 @@ The library integrates seamlessly with Ollama, and no additional setup is requir
 
 ## Features
 
-- **ELIF5 Component**: [Brief description of what this component does]
+- **ELI5 Component**: [Brief description of what this component does]
 - **Summarize Component**: [Brief description of what this component does]
 - **Semantic Search Box Component**: [Brief description of what this component does]
 
@@ -22,14 +22,27 @@ To use this library, simply install it via npm:
 npm install ui-ai
 ```
 
+
+## Getting Started
+
+First, run the chorma server:
+```
+./run_chroma.sh
+
+
+Second, run the development server:
+```bash
+npm run dev
+```
+
 ## Usage
 
 Once the package is installed, you can start using the components. Here's an example of how to use each one:
 
-### ELIF5 Component
+### ELI5 Component
 
 ```javascript
-import { ELIF5 } from 'ui_ai';
+import { ELI5 } from 'ui_ai';
 
 const App = () => {
   return (
