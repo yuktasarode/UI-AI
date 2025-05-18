@@ -43,6 +43,30 @@ export function SemanticSearchBox() {
     alert(`Uploaded ${data.count} chunks`);
   };
 
+  const handleDelete = async () => {
+  const res = await fetch('/api/delete', {
+    method: 'POST',
+  });
+  if (res.ok) {
+    alert('All uploaded data deleted from Chroma.');
+  } else {
+    alert('Failed to delete data.');
+  }
+};
+
+const handleGetChunkSize = async () => {
+  const res = await fetch('/api/chunksize');
+  const data = await res.json();
+
+  if (res.ok) {
+    alert(`Total chunks in Chroma: ${data.count}`);
+  } else {
+    alert('Failed to get chunk size');
+  }
+};
+
+
+
   return (
     <div style={{ border: '4px solid blue', borderRadius:"4px", padding:"5px" }}>
       <h3>Upload your data (plain text)</h3>
@@ -55,6 +79,16 @@ export function SemanticSearchBox() {
       <button onClick={handleUpload} className="myButton-2">
         Upload Data
       </button>
+
+      <button onClick={handleDelete} className="myButton-2" >
+        Delete All Uploaded Data
+      </button>
+
+      <button onClick={handleGetChunkSize} className="myButton-2" >
+        Show Chunk
+      </button>
+
+    
 
       <hr className="myHR"></hr>
 
@@ -82,6 +116,8 @@ export function SemanticSearchBox() {
       <button onClick={handleSearch} className="myButton">
         Search
       </button>
+
+      
 
       {results && (
         <div style={{ marginTop: '1rem', padding: '0.75rem', borderRadius: '6px' }} className="bg-orange-platelet">
