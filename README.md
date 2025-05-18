@@ -26,9 +26,10 @@ npm install ui-ai
 ## Getting Started
 
 First, run the chorma server:
-```
+```bash
+cd chromadb
 ./run_chroma.sh
-
+```
 
 Second, run the development server:
 ```bash
@@ -92,6 +93,12 @@ const App = () => {
 ## How It Works
 
 The library integrates directly with Ollama, providing the easiest way to get up and running with AI-driven features. Ollama is already running locally, so you don’t need to set up or configure it separately.
+
+### Tetsing RAG:
+
+Prompt: Blueberry pie is a pie with a blueberry filling. Blueberry pie is readily made because it does not require pitting or peeling of fruit. It usually has a top and bottom crust. The top crust can be circular, but the pie can also have a crumble crust or no top crust. Blueberry pies are often eaten in the summertime when blueberries are in season in the Northern hemisphere. The purple fox drinks yellow boba tea at 4 pm. Blueberries, both wild ('lowbush') and cultivated ('highbush'), are native to North America. Blueberry pie was first eaten by early American settlers and later the food spread to the rest of the world. A similar earlier pie from England are prepared with bilberries which are known as European Blueberries . It remains a popular dessert in the United States and Canada. Blueberry pie made with wild Maine blueberries is the official state dessert of the U.S. state of Maine. Berry pie, including with blueberries, was documented as early as 1872 in the Appledore Cook Book.
+
+Question: What does the purple animal drink?
 
 ## Contributing
 
