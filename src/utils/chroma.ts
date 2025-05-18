@@ -50,6 +50,19 @@ export async function addToChroma(chunks: string[]) {
   return ids.length;
 }
 
+export async function deleteAllFromChroma() {
+ const collection = await getCollection();
+  const all = await collection.get();
+  const ids = all.ids || [];
+
+  if (ids.length > 0) {
+    await collection.delete({ ids });
+    console.log('✅ Deleted all documents');
+  } else {
+    console.log('🟡 No documents to delete');
+  }
+}
+
 // Query Chroma using Ollama-generated embedding
 export async function queryChroma(query: string, topK = 3): Promise<string[]> {
     try {
