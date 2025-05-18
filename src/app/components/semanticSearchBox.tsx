@@ -33,7 +33,7 @@ export function SemanticSearchBox() {
   };
 
   const handleUpload = async () => {
-    const res = await fetch('/api/upload', {
+    const res = await fetch('/api/upload/text', {
       method: 'POST',
       body: JSON.stringify({ content: uploadText }),
       headers: { 'Content-Type': 'application/json' },
@@ -65,6 +65,22 @@ const handleGetChunkSize = async () => {
   }
 };
 
+const handlePDFUpload = async (file: File | undefined) => {
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  console.log("formData",formData)
+
+  const res = await fetch('/api/upload/pdf', {
+    method: 'POST',
+    body: formData,
+  });
+
+  const data = await res.json();
+  alert(`Uploaded ${data.count} chunks from PDF`);
+};
 
 
   return (
@@ -76,19 +92,38 @@ const handleGetChunkSize = async () => {
         placeholder="Paste your notes, docs, etc..."
         style={{ width: '100%', height: '100px', marginBottom: '0.5rem' }}
       />
-      <button onClick={handleUpload} className="myButton-2">
-        Upload Data
-      </button>
+      
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+  <button onClick={handleUpload} className="myButton-2">
+    Upload Data
+  </button>
 
-      <button onClick={handleDelete} className="myButton-2" >
-        Delete All Uploaded Data
-      </button>
+  <button onClick={handleDelete} className="myButton-2">
+    Delete All Uploaded Data
+  </button>
 
-      <button onClick={handleGetChunkSize} className="myButton-2" >
-        Show Chunk
-      </button>
+  <button onClick={handleGetChunkSize} className="myButton-2">
+    Show Chunk
+  </button>
 
-    
+  <label
+    style={{
+      cursor: 'pointer',
+      display: 'inline-flex',
+      alignItems: 'center',
+    }}
+    title="Upload PDF"
+  >
+    <img src="/folder.png" alt="Upload PDF" width="24" height="24" />
+    <input
+      type="file"
+      accept="application/pdf"
+      onChange={(e) => handlePDFUpload(e.target.files?.[0])}
+      style={{ display: 'none' }}
+    />
+  </label>
+</div>
+
 
       <hr className="myHR"></hr>
 
