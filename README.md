@@ -1,4 +1,4 @@
-# UI-AI Library
+# AI-enhanced UI Library
 
 A simple and easy-to-use library built with Next.js, custom components, and the Ollama JavaScript library. This library includes the following components:
 
@@ -10,9 +10,10 @@ The library integrates seamlessly with Ollama, and no additional setup is requir
 
 ## Features
 
-- **ELI5 Component**: [Brief description of what this component does]
-- **Summarize Component**: [Brief description of what this component does]
-- **Semantic Search Box Component**: [Brief description of what this component does]
+- **ELI5 Component**: Explain any term.
+- **Summarize Component**: Summarize any uploaded content.
+- **Semantic Search Box Component**: Search given PDFs for text and answer questions based on that. Built a privacy-first AI tool with a multi-agent RAG pipeline using Next.js and Ollama for offline document analysis.
+Engineered a structured data extraction system using PDF.js, storing embeddings in ChromaDB as a vector database.
 
 ## Installation
 
